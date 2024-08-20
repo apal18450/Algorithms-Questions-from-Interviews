@@ -1,0 +1,27 @@
+This problem was asked by Microsoft.
+
+You have n fair coins and you flip them all at the same time. Any that come up tails you set aside. 
+The ones that come up heads you flip again. How many rounds do you expect to play before only one coin remains?
+Write a function that, given n, returns the number of rounds you'd expect to play until one coin remains.
+
+Program:
+
+def rounds_of_flipping(n):
+    if n <= 1:
+        return 0
+    rounds = 0
+    while n > 1:
+        rounds += 1
+        n = (n + 1) // 2
+    return rounds
+
+def main():
+    n = int(input("Enter the number of coins: "))
+    result = rounds_of_flipping(n)
+    print(f"Expected number of rounds to reach one coin: {result}")
+
+if __name__ == "__main__":
+    main()
+
+Comments:
+In this program, it is assumed that the number inputted by the user is positive. If we assume that user inputs negative number then we need to do error handling and use a try statement for ValueError that can occur 
