@@ -1,0 +1,36 @@
+Program:
+
+def compare(x, y):
+    if x + y > y + x:
+        return -1  
+    elif x + y < y + x:
+        return 1   
+    else:
+        return 0   
+
+def bubble_sort(arr, compare):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if compare(arr[j], arr[j+1]) > 0:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+def largest_no(nums):
+    nums = [str(num) for num in nums]
+    bubble_sort(nums, compare)
+    result = ''.join(nums)
+    if result[0] == '0':
+        return '0'
+    return result
+
+input_list = input("Enter numbers: ").split()
+nums = [int(num) for num in input_list]  
+print(largest_no(nums))
+
+
+Output:
+
+Enter numbers: 12 32 47 55 71 89
+897155473212
+
+Completed using bubble sort algorithm in O(n^2) time
