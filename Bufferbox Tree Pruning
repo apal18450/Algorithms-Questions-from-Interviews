@@ -1,0 +1,95 @@
+This question was asked by BufferBox.
+
+Given a binary tree where all nodes are either 0 or 1, prune the tree so that subtrees containing all 0s are removed.
+
+For example, given the following tree:
+
+   0
+  / \
+ 1   0
+    / \
+   1   0
+  / \
+ 0   0
+should be pruned to:
+
+   0
+  / \
+ 1   0
+    /
+   1
+We do not remove the tree at the root or its left child because it still has a 1 as a descendant.
+
+Program:
+class Treenode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def prunetree(root: Treenode) -> Treenode:
+    if not root:
+        return None
+    
+    root.left = prunetree(root.left)
+    root.right = prunetree(root.right)
+    
+    if root.val == 0 and not root.left and not root.right:
+        return None
+    
+    return root
+
+def buildtree(values):
+    if not values:
+        return None
+    
+    root = Treenode(values[0])
+    queue = [root]
+    i = 1
+    while i < len(values):
+        node = queue.pop(0)
+        
+        if values[i] is not None:
+            node.left = Treenode(values[i])
+            queue.append(node.left)
+        i += 1
+        
+        if i < len(values) and values[i] is not None:
+            node.right = Treenode(values[i])
+            queue.append(node.right)
+        i += 1
+        
+    return root
+
+def level_order_traversal(root: Treenode):
+    if not root:
+        return []
+    
+    result = []
+    queue = [root]
+    while queue:
+        node = queue.pop(0)
+        result.append(node.val if node else None)
+        if node:
+            queue.append(node.left)
+            queue.append(node.right)
+    while result and result[-1] is None:
+        result.pop()
+    
+    return result
+
+def main():
+    tree_input = input("Enter binary tree in level-order ")
+    
+    tree_values = eval(tree_input)
+    root = buildtree(tree_values)
+    pruned_tree = prunetree(root)
+    pruned_tree_values = level_order_traversal(pruned_tree)
+    print("Pruned tree (level order):", pruned_tree_values)
+
+if __name__ == "__main__":
+    main()
+
+Output:
+Enter binary tree in level-order 0,1,1,0,0,1,1,0
+Pruned tree (level order): [0, 1, 1, None, None, 1, 1]
