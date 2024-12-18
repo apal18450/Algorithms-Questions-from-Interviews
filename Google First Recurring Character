@@ -1,0 +1,28 @@
+This problem was asked by Google.
+Given a string, return the first recurring character in it, or null if there is no recurring character.
+For example, given the string "acbbac", return "b". Given the string "abcdef", return null.
+
+Program:
+
+def first_recurring_character(s: str):
+    seen = set()  
+    for char in s:
+        if char in seen:
+            return char
+        seen.add(char)
+    return None
+
+string = input("Enter a string: ")
+result = first_recurring_character(string)
+
+if result:
+    print(f"The first recurring character in input string is: {result}")
+else:
+    print("There is no recurring character in the given string.")
+
+Output: 
+Enter a string: google
+The first recurring character in input string is: o
+
+Enter a string: computer
+There is no recurring character in the given string.
