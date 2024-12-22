@@ -1,0 +1,38 @@
+This problem was recently asked by Google.
+
+Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+
+For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+
+Bonus: Can you do this in one pass?
+
+Program:
+def pair_of_targetted_sum(nums, target):
+    visited = set()
+    
+    for num in nums:
+        needed = target - num
+        if needed in visited: 
+            return num, needed 
+        visited.add(num)  
+    
+    return None  
+
+nums = list(map(int, input("Enter a list of numbers: ").split()))
+k = int(input("Enter the targetted sum: "))
+
+result = pair_of_targetted_sum(nums, k)
+
+if result:
+    print(f"the two numbers that add up to {k} are: {result[0]} and {result[1]}")
+else:
+    print(f"there are no two numbers that add up to the targetted sum of {k}")
+
+Output:
+
+Enter a list of numbers separated by spaces: 10 4 2 4 9
+Enter the target sum: 8
+the two numbers that add up to 8 are: 4 and 4
+
+Time Complexity: O(n), since this is done in one pass, each element is accessed once
+Space Complexity: O(n) for storing n unique elements in the 'visited' set 
