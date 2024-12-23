@@ -24,4 +24,7 @@ if __name__ == "__main__":
     main()
 
 Comments:
-In this program, it is assumed that the number inputted by the user is positive. If we assume that user inputs negative number then we need to do error handling and use a try statement for ValueError that can occur 
+In this program, it is assumed that the number inputted by the user is positive. 
+If we assume that user inputs negative number then we need to do error handling and use a try statement for ValueError that can occur 
+
+Time Complexity: ln n 
